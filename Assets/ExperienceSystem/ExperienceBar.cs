@@ -10,13 +10,18 @@ public class ExperienceBar : MonoBehaviour
     Slider _expSlider;
 
     [Header("Text")]
-    [SerializeField] private TextMeshProUGUI _currentExperienceText;
-    [SerializeField] private TextMeshProUGUI _maxExperienceText;
-    [SerializeField] private TextMeshProUGUI _currentLevelText;
+    [SerializeField] [Tooltip("The player's current level")]
+    private TextMeshProUGUI _currentExperienceText;
+    [SerializeField] [Tooltip("The player's current experience")]
+    private TextMeshProUGUI _currentLevelText;
+    [SerializeField] [Tooltip("The experience cap to level up")]
+    private TextMeshProUGUI _maxExperienceText;
 
     [Header("Display")]
-    [SerializeField] private bool _displayExperienceBar;
-    [SerializeField] private bool _displayStats;
+    [SerializeField] 
+    private bool _displayExperienceBar = true;
+    [SerializeField]
+    private bool _displayExperienceText = true;
 
     private void Awake()
     {
@@ -29,12 +34,20 @@ public class ExperienceBar : MonoBehaviour
     public void SetExperience(int exp)
     {
         _expSlider.value = exp;
+
+        if (_displayExperienceText == false)
+            _currentExperienceText.enabled = false;
+
         _currentExperienceText.text = _expSlider.value.ToString();
     }
 
     public void SetMaxExperience(int exp)
     {
         _expSlider.maxValue = exp;
+
+        if (_displayExperienceText == false)
+            _maxExperienceText.enabled = false;
+
         _maxExperienceText.text = _expSlider.maxValue.ToString();
     }
 

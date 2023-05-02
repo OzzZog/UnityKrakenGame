@@ -9,7 +9,7 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _statsText;
 
     [Header("Display")]
-    [SerializeField] private bool _displayStats;
+    [SerializeField] private bool _displayStats = true;
 
     private void Awake()
     {
