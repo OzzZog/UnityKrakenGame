@@ -5,7 +5,7 @@ using UnityEngine;
 public class Experience : MonoBehaviour
 {
     [Header("Experience")]
-    [SerializeField] 
+    [SerializeField]
     private int _currentExperience = 0;
     [SerializeField] [Tooltip("Experience needed to level up")]
     private int _experienceCap = 100;
@@ -25,9 +25,8 @@ public class Experience : MonoBehaviour
     private int _damage = 10;
 
     [Header("UI")]
-    [SerializeField] public ExperienceBar experienceBar;
+    [SerializeField] private ExperienceBar experienceBar;
 
-    // Start is called before the first frame update
     void Start()
     {
         experienceBar.SetExperience(_currentExperience);
@@ -52,7 +51,14 @@ public class Experience : MonoBehaviour
 
     public void LoseExperience(int experienceLost)
     {
-        _currentExperience -= experienceLost;
+        if(_currentExperience - experienceLost <= 0)
+        {
+            _currentExperience = 0;
+        }
+        else
+        {
+            _currentExperience -= experienceLost;
+        }
         experienceBar.SetExperience(_currentExperience);
     }
 
@@ -61,7 +67,9 @@ public class Experience : MonoBehaviour
         _currentLevel++;
         experienceBar.SetLevelText(_currentLevel);
 
-        _currentExperience = 0;
+        int leftOverExperience = Mathf.Abs(_experienceCap - _currentExperience);
+        Debug.Log(leftOverExperience);
+        _currentExperience = leftOverExperience;
         experienceBar.SetExperience(_currentExperience);
 
         _experienceCap += _changeMaxExperience;

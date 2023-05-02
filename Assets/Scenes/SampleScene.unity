@@ -359,6 +359,7 @@ MonoBehaviour:
   _currentExperienceText: {fileID: 1852605909}
   _maxExperienceText: {fileID: 1884366691}
   _currentLevelText: {fileID: 1893616802}
+  _displayExperienceBar: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
