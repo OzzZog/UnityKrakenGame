@@ -16,11 +16,13 @@ public class ExperienceBar : MonoBehaviour
 
     [Header("Display")]
     [SerializeField] private bool _displayExperienceBar;
+    [SerializeField] private bool _displayStats;
 
     private void Awake()
     {
         if (_displayExperienceBar == false)
             gameObject.SetActive(false);
+
         _expSlider = GetComponent<Slider>();    
     }
 

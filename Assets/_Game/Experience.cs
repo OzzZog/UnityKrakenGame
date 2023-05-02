@@ -16,22 +16,22 @@ public class Experience : MonoBehaviour
 
     [Header("Player Stats")]
     [SerializeField] 
-    private int _movementSpeed = 10;
-    [SerializeField] 
-    private int _currentHealth = 100;
-    [SerializeField] 
     private int _maxHealth = 100;
     [SerializeField] 
     private int _damage = 10;
+    [SerializeField]
+    private int _movementSpeed = 10;
 
     [Header("UI")]
     [SerializeField] private ExperienceBar experienceBar;
+    [SerializeField] private StatsUI statsUI;
 
     void Start()
     {
         experienceBar.SetExperience(_currentExperience);
         experienceBar.SetMaxExperience(_experienceCap);
         experienceBar.SetLevelText(_currentLevel);
+        statsUI.SetStats(_maxHealth, _damage, _movementSpeed);
     }
 
     // Update is called once per frame
@@ -83,5 +83,7 @@ public class Experience : MonoBehaviour
         _movementSpeed++;
         _maxHealth++;
         _damage++;
+
+        statsUI.SetStats(_maxHealth, _damage, _movementSpeed);
     }
 }
