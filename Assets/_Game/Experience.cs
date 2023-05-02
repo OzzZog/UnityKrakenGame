@@ -24,37 +24,50 @@ public class Experience : MonoBehaviour
     [SerializeField] 
     private int _damage = 10;
 
+    [Header("UI")]
+    [SerializeField] public ExperienceBar experienceBar;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        experienceBar.SetExperience(_currentExperience);
+        experienceBar.SetMaxExperience(_experienceCap);
+        experienceBar.SetLevelText(_currentLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
-        LevelUp();
+        if(_currentExperience >= _experienceCap)
+        {
+            LevelUp();
+        }
     }
 
     public void GainExperience(int experienceGained)
     {
         _currentExperience += experienceGained;
+        experienceBar.SetExperience(_currentExperience);
     }
 
     public void LoseExperience(int experienceLost)
     {
         _currentExperience -= experienceLost;
+        experienceBar.SetExperience(_currentExperience);
     }
 
     public void LevelUp()
     {
-        if (_currentExperience == _experienceCap)
-        {
-            _currentExperience = 0;
-            _currentLevel++;
-            _experienceCap += _changeMaxExperience;
-            IncreaseStats();
-        }
+        _currentLevel++;
+        experienceBar.SetLevelText(_currentLevel);
+
+        _currentExperience = 0;
+        experienceBar.SetExperience(_currentExperience);
+
+        _experienceCap += _changeMaxExperience;
+        experienceBar.SetMaxExperience(_experienceCap);
+
+        IncreaseStats();
     }
 
     public void IncreaseStats()
